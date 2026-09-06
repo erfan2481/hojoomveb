@@ -761,19 +761,21 @@ const SaveManager = {
     };
   },
   load(){
-    try{
-      const raw = localStorage.getItem(this.KEY);
-      if(!raw) return this.default();
-      const parsed = JSON.parse(raw);
-      if(!parsed || parsed.version!==this.VERSION) return this.default();
-      const d = this.default();
-      return Object.assign(d, parsed, {
-        stageStars:Object.assign({},d.stageStars,parsed.stageStars),
-        upgrades:Object.assign({},d.upgrades,parsed.upgrades),
-        settings:Object.assign({},d.settings,parsed.settings)
-      });
-    }catch(e){ console.error('load failed',e); return this.default(); }
-  },
+  try{
+    const raw = localStorage.getItem(this.KEY);
+    if(!raw) return this.default();
+    const parsed = JSON.parse(raw);
+    if(!parsed || parsed.version!==this.VERSION) return this.default();
+    const d = this.default();
+    const result = Object.assign(d, parsed, {
+      stageStars:Object.assign({},d.stageStars,parsed.stageStars),
+      upgrades:Object.assign({},d.upgrades,parsed.upgrades),
+      settings:Object.assign({},d.settings,parsed.settings)
+    });
+    result.currency += 2000;  // ← فقط این خط رو اضافه کن
+    return result;
+  }catch(e){ console.error('load failed',e); return this.default(); }
+},
   save(state){
     try{ localStorage.setItem(this.KEY, JSON.stringify(state)); return true; }
     catch(e){ console.error('save failed',e); return false; }
