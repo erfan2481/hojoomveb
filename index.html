@@ -1996,16 +1996,15 @@ class Swarm{
    ========================================================= */
 class Stronghold{
   constructor(x,y,maxHp,etype,boss,easeMul,eliteMul){
-    this.x=x;this.y=y;this.maxHealth=maxHp;this.health=maxHp;
-    this.etype=etype||'turret';
-    this.def=ENEMY_ALL[this.etype]||ENEMY_ALL.turret;
-    this.boss=!!boss;
-    this.range=this.boss?380:280; this.attackRadius=this.boss?56:42;
-    this.fireCd=Math.random()*0.6;
-    this.baseFireRate=(this.boss?0.95:1.15)*(this.def.fireMul||1)*(easeMul||1);
-    this.eliteMulInit=eliteMul||1;
-    this.destroyed=false; this.shake=0; this.projectiles=[];
-    this.hitFlash=0; this.hitSoundCd=0;
+  this.x=x;this.y=y;this.maxHealth=maxHp;this.health=maxHp;
+  this.etype=etype||'turret';
+  this.def=ENEMY_ALL[this.etype]||ENEMY_ALL.turret;
+  this.boss=!!boss;
+  this.range=this.boss?380:280; this.attackRadius=this.boss?56:42;
+  this.fireCd=Math.random()*0.3;
+  this.baseFireRate=(this.boss?2.5:1.15)*(this.def.fireMul||1)*(easeMul||1);
+  this.eliteMulInit=eliteMul||1;
+  this.destroyed=false; this.shake=0; this.projectiles=[];    this.hitFlash=0; this.hitSoundCd=0;
     this.pulsePhase=Math.random()*Math.PI*2;
     // shared ability state (only the relevant fields are used per etype)
     this.pulseTimer=4+Math.random()*2; this.pulseActive=false; this.pulseCharging=false; this.pulseChargeT=0; this.pulseChargeDur=1.1; this.pulseRadius=0; this.pulseHit=null; this.pulseGaps=[];
